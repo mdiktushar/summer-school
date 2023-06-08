@@ -1,8 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import useAuth from "../../Hooks/useAuth";
+import Swal from "sweetalert2";
 
 const Login = () => {
+  const [errorMessage, setError] = useState("");
   const {
     register,
     handleSubmit,
@@ -10,9 +13,39 @@ const Login = () => {
     formState: { errors },
   } = useForm();
 
+  const { signIn } = useAuth();
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  const goto = location.state?.form?.pathname || `/`;
+
   // submit function
   const loginForm = (data) => {
     console.log(data);
+    setError("")
+    signIn(data.email, data.password)
+      .then((userCredential) => {
+        // Signed in
+        const user = userCredential.user;
+        console.log(user);
+        Swal.fire({
+          title: "User Login Successful.",
+          showClass: {
+            popup: "animate__animated animate__fadeInDown",
+          },
+          hideClass: {
+            popup: "animate__animated animate__fadeOutUp",
+          },
+        });
+        navigate(goto, { replace: true });
+        // ...
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        console.log(error);
+        setError(errorMessage);
+      });
   };
 
   return (
@@ -24,7 +57,7 @@ const Login = () => {
               <span className="label-text">Email</span>
             </label>
             <input
-              type="text"
+              type="email"
               placeholder="email"
               name="email"
               className="input input-bordered"
@@ -45,7 +78,7 @@ const Login = () => {
               <span className="label-text">Password</span>
             </label>
             <input
-              type="text"
+              type="password"
               placeholder="password"
               name="password"
               className="input input-bordered"
@@ -70,6 +103,7 @@ const Login = () => {
             <button className="btn btn-primary">Login</button>
           </div>
           <label className="label">
+            <p className="label-text-alt text-red-600">{errorMessage}</p>
             <p className="label-text-alt">
               Don't have an account? <Link to={`/signup`}>SignUp now</Link>
             </p>
