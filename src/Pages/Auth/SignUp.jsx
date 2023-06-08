@@ -11,14 +11,14 @@ const SignUp = () => {
   } = useForm();
 
   // submit function
-  const onSubmit = (data) => {
+  const signUpForm = (data) => {
     console.log(data);
   };
 
   return (
     <div className="hero min-h-[700px] bg-base-200">
       <div className="card flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-100">
-        <form onSubmit={handleSubmit(onSubmit)} className="card-body">
+        <form onSubmit={handleSubmit(signUpForm)} className="card-body">
           <div className="form-control">
             <label className="label">
               <span className="label-text">Name</span>
@@ -87,22 +87,20 @@ const SignUp = () => {
               name="password"
               className="input input-bordered"
               {...register("password", {
-                required: true,
-                minLength: 6,
-                pattern: /(?=.*[A-Z])(?=.*[!@#$&*])/,
+                required: "Password is required",
+                minLength: {
+                  value: 6,
+                  message: "Password must be 6 characters",
+                },
+                pattern: {
+                  value: /(?=.*[A-Z])(?=.*[!@#$&*])/,
+                  message:
+                    "Password must have at least one Uppercase letter & one special character.",
+                },
               })}
             />
-            {errors.password?.type === "required" && (
-              <p className="text-red-600">Password is required</p>
-            )}
-            {errors.password?.type === "minLength" && (
-              <p className="text-red-600">Password must be 6 characters</p>
-            )}
-            {errors.password?.type === "pattern" && (
-              <p className="text-red-600">
-                Password must have at least one Uppercase letter & one special
-                character.
-              </p>
+            {errors.password && (
+              <p className="text-red-600">{errors.password.message}</p>
             )}
           </div>
           <div className="form-control">
