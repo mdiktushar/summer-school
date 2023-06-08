@@ -1,6 +1,31 @@
 import React from "react";
+import { Link, NavLink } from "react-router-dom";
+import logo from "../../../assets/logo.png";
 
 const NavigationBar = () => {
+  const list = (
+    <>
+      <li>
+        <NavLink className={'navLink'} to={`/`}>Home</NavLink>
+      </li>
+      <li tabIndex={0}>
+        <details>
+          <summary>Parent</summary>
+          <ul className="p-2">
+            <li>
+              <NavLink className={'navLink'} to={`/oter`}>Submenu 1</NavLink>
+            </li>
+            <li>
+              <NavLink className={'navLink'} to={`/sd`}>Submenu 2</NavLink>
+            </li>
+          </ul>
+        </details>
+      </li>
+      <li>
+        <NavLink className={'navLink'} to={`/afa`}>Item 3</NavLink>
+      </li>
+    </>
+  );
   return (
     <div className="navbar bg-base-100">
       <div className="navbar-start">
@@ -25,52 +50,22 @@ const NavigationBar = () => {
             tabIndex={0}
             className="menu menu-sm dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52"
           >
-            <li>
-              <a>Item 1</a>
-            </li>
-            <li>
-              <a>Parent</a>
-              <ul className="p-2">
-                <li>
-                  <a>Submenu 1</a>
-                </li>
-                <li>
-                  <a>Submenu 2</a>
-                </li>
-              </ul>
-            </li>
-            <li>
-              <a>Item 3</a>
-            </li>
+            {/* all links */}
+            {list}
           </ul>
         </div>
-        <a className="btn btn-ghost normal-case text-xl">daisyUI</a>
+        <Link to={"/"} className="btn btn-ghost normal-case text-xl">
+          <img className="object-fill w-20" src={logo} alt="" />
+        </Link>
       </div>
       <div className="navbar-center hidden lg:flex">
         <ul className="menu menu-horizontal px-1">
-          <li>
-            <a>Item 1</a>
-          </li>
-          <li tabIndex={0}>
-            <details>
-              <summary>Parent</summary>
-              <ul className="p-2">
-                <li>
-                  <a>Submenu 1</a>
-                </li>
-                <li>
-                  <a>Submenu 2</a>
-                </li>
-              </ul>
-            </details>
-          </li>
-          <li>
-            <a>Item 3</a>
-          </li>
+          {/* all links */}
+          {list}
         </ul>
       </div>
       <div className="navbar-end">
-        <a className="btn">Button</a>
+        <button className="btn">Button</button>
       </div>
     </div>
   );
