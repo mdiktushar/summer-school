@@ -1,6 +1,8 @@
 import React from "react";
 import { useForm } from "react-hook-form";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import useAuth from "../../Hooks/useAuth";
+import Swal from "sweetalert2";
 
 const SignUp = () => {
   const {
@@ -10,9 +12,21 @@ const SignUp = () => {
     formState: { errors },
   } = useForm();
 
+  const { createUser, updateUserProfile } = useAuth();
+  const navigate = useNavigate();
+
   // submit function
   const signUpForm = (data) => {
     console.log(data);
+
+    createUser(data.email, data.password).then((result) => {
+      const loggedUser = result.user;
+      console.log(loggedUser);
+
+      updateUserProfile(data.name, data.photoURL);
+
+      navigate("/");
+    });
   };
 
   return (
@@ -66,11 +80,6 @@ const SignUp = () => {
               className="input input-bordered"
               {...register("photoURL", {
                 required: "Photo URL is required",
-                pattern: {
-                  value:
-                    /^(https?:\/\/)?([\da-z.-]+)\.([a-z.]{2,6})([/\w .-]*)*\/?$/,
-                  message: "Invalid URL",
-                },
               })}
             />
             {errors.photoURL && (
