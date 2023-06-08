@@ -13,6 +13,7 @@ const Login = () => {
             <input
               type="text"
               placeholder="email"
+              name="email"
               className="input input-bordered"
             />
           </div>
@@ -23,6 +24,7 @@ const Login = () => {
             <input
               type="text"
               placeholder="password"
+              name="password"
               className="input input-bordered"
             />
           </div>
@@ -32,7 +34,7 @@ const Login = () => {
           <label className="label">
             <p className="label-text-alt">
               Don't have an account?{" "}
-              <Link href="#" >
+              <Link to={`/signup`} >
                 SignUp now
               </Link>
             </p>
