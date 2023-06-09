@@ -2,14 +2,15 @@ import React from "react";
 import { Link, NavLink } from "react-router-dom";
 import logo from "../../../assets/logo.png";
 import useAuth from "../../../Hooks/useAuth";
-import useAdmin from "../../../Hooks/useAdmin";
 import useRole from "../../../Hooks/useRole";
+import { FaUserCheck, FaUserTie, FaUserShield } from "react-icons/fa";
 
 const NavigationBar = () => {
   const { user, logOut } = useAuth();
-  // const [isAdmin] = useAdmin();
-  const [role] = useRole()
+
+  const [role] = useRole();
   console.log(role);
+
   const handleLogOut = () => {
     logOut()
       .then(() => {})
@@ -23,11 +24,27 @@ const NavigationBar = () => {
           Home
         </NavLink>
       </li>
-      <li>
-        <NavLink className={"navLink"} to={`/afa`}>
-          Item 3
-        </NavLink>
-      </li>
+      {role === "student" && (
+        <li>
+          <NavLink className={"navLink"} to={`/student/dashboard`}>
+            <FaUserCheck size={25} /> Dashboard
+          </NavLink>
+        </li>
+      )}
+      {role === "instructor" && (
+        <li>
+          <NavLink className={"navLink"} to={`/instructor/dashboard`}>
+            <FaUserTie size={25} /> Dashboard
+          </NavLink>
+        </li>
+      )}
+      {role === "admin" && (
+        <li>
+          <NavLink className={"navLink"} to={`/admin/dashboard`}>
+            <FaUserShield size={25} /> Dashboard
+          </NavLink>
+        </li>
+      )}
     </>
   );
   return (
@@ -73,7 +90,10 @@ const NavigationBar = () => {
         {user ? (
           <div className="dropdown dropdown-end">
             <label tabIndex={0} className=" m-1">
-              <div className="avatar tooltip tooltip-bottom" data-tip={user.displayName}>
+              <div
+                className="avatar tooltip tooltip-bottom"
+                data-tip={user.displayName}
+              >
                 <div className="w-10 rounded-full">
                   <img src={user.photoURL} />
                 </div>
