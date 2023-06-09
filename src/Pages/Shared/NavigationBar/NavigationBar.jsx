@@ -3,13 +3,13 @@ import { Link, NavLink } from "react-router-dom";
 import logo from "../../../assets/logo.png";
 import useAuth from "../../../Hooks/useAuth";
 import useAdmin from "../../../Hooks/useAdmin";
+import useRole from "../../../Hooks/useRole";
 
 const NavigationBar = () => {
   const { user, logOut } = useAuth();
-  const [isAdmin] = useAdmin();
-
-  
-
+  // const [isAdmin] = useAdmin();
+  const [role] = useRole()
+  console.log(role);
   const handleLogOut = () => {
     logOut()
       .then(() => {})
