@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 .navLink{
-    background: white;
+    background: bg-gray-100;
     color: black;
 }
 

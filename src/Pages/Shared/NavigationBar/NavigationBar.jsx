@@ -1,33 +1,35 @@
 import React from "react";
 import { Link, NavLink } from "react-router-dom";
 import logo from "../../../assets/logo.png";
+import useAuth from "../../../Hooks/useAuth";
+import useAdmin from "../../../Hooks/useAdmin";
 
 const NavigationBar = () => {
+  const { user, logOut } = useAuth();
+  // const [isAdmin] = useAdmin();
+
+  const handleLogOut = () => {
+    logOut()
+      .then(() => {})
+      .catch((error) => console.log(error));
+  };
+
   const list = (
     <>
       <li>
-        <NavLink className={'navLink'} to={`/`}>Home</NavLink>
-      </li>
-      <li tabIndex={0}>
-        <details>
-          <summary>Parent</summary>
-          <ul className="p-2">
-            <li>
-              <NavLink className={'navLink'} to={`/oter`}>Submenu 1</NavLink>
-            </li>
-            <li>
-              <NavLink className={'navLink'} to={`/sd`}>Submenu 2</NavLink>
-            </li>
-          </ul>
-        </details>
+        <NavLink className={"navLink"} to={`/`}>
+          Home
+        </NavLink>
       </li>
       <li>
-        <NavLink className={'navLink'} to={`/afa`}>Item 3</NavLink>
+        <NavLink className={"navLink"} to={`/afa`}>
+          Item 3
+        </NavLink>
       </li>
     </>
   );
   return (
-    <div className="navbar bg-base-100">
+    <div className="navbar bg-gray-100">
       <div className="navbar-start">
         <div className="dropdown">
           <label tabIndex={0} className="btn btn-ghost lg:hidden">
@@ -65,7 +67,34 @@ const NavigationBar = () => {
         </ul>
       </div>
       <div className="navbar-end">
-        <Link to={`/login`} className="btn">Button</Link>
+        {/* login logout button toggle*/}
+        {user ? (
+          <div className="dropdown dropdown-end">
+            <label tabIndex={0} className=" m-1">
+              <div className="avatar tooltip tooltip-bottom" data-tip={user.displayName}>
+                <div className="w-10 rounded-full">
+                  <img src={user.photoURL} />
+                </div>
+              </div>
+            </label>
+            <ul
+              tabIndex={0}
+              className="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-52"
+            >
+              <li>
+                <button onClick={handleLogOut}>Logout</button>
+              </li>
+            </ul>
+          </div>
+        ) : (
+          <Link to={`/login`} className="btn">
+            Login
+          </Link>
+        )}
+
+        <button to={``} className="btn">
+          Theme
+        </button>
       </div>
     </div>
   );
