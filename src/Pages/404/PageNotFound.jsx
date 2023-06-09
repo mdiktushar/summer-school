@@ -3,8 +3,8 @@ import NotFound from '../../assets/404.gif'
 
 const PageNotFound = () => {
     return (
-        <div class="w-full h-screen">
-            <img class="object-cover w-full h-full" src={NotFound} alt="" />
+        <div className="w-full h-screen">
+            <img className="object-cover w-full h-full" src={NotFound} alt="" />
         </div>
     );
 };

@@ -10,9 +10,15 @@ const useRole = () => {
     queryKey: ["role", user?.email],
     enabled: !loading,
     queryFn: async () => {
+      if (!user?.email) {
+        throw new Error("User email not available.");
+      }
       const res = await axiosSecure.get(`/users/role/${user?.email}`);
       console.log("Role response", res);
-      return res.data.role;
+      if (!res.data?.role) {
+        throw new Error("Role data not available.");
+      }
+      return res.data?.role;
     },
   });
   console.log(role, isRoleLoading);
