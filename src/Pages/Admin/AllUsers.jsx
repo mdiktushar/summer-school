@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import useAxiosSecure from "../../Hooks/useAxiosSecure";
 import { useQuery } from "@tanstack/react-query";
 import useAuth from "../../Hooks/useAuth";
+import Swal from "sweetalert2";
 
 const AllUsers = () => {
   const [axiosSecure] = useAxiosSecure();
@@ -11,7 +12,27 @@ const AllUsers = () => {
     return res.data;
   });
 
-  console.log(users);
+  const handleRole = (user, role) => {
+    fetch(`${import.meta.env.VITE_URL}users/${role}/${user._id}`, {
+      method: "PATCH",
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+        if (data.modifiedCount) {
+          refetch();
+          Swal.fire({
+            position: "top-end",
+            icon: "success",
+            title: `${user.name} is ${role == "admin" && "an Admin"} ${
+              role == "instructor" && "a Instructor"
+            } Now!`,
+            showConfirmButton: false,
+            timer: 1500,
+          });
+        }
+      });
+  };
 
   return (
     <div>
@@ -44,12 +65,14 @@ const AllUsers = () => {
                       <button
                         disabled={person.role == "instructor"}
                         className="btn join-item bg-blue-200"
+                        onClick={() => handleRole(person, "instructor")}
                       >
                         Instructor
                       </button>
                       <button
                         disabled={person.role == "admin"}
                         className="btn join-item bg-red-200"
+                        onClick={() => handleRole(person, "admin")}
                       >
                         Admin
                       </button>
