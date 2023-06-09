@@ -1,19 +1,22 @@
 import React from "react";
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 import logo from "../../../assets/logo.png";
 import useAuth from "../../../Hooks/useAuth";
 import useRole from "../../../Hooks/useRole";
 import { FaUserCheck, FaUserTie, FaUserShield } from "react-icons/fa";
 
 const NavigationBar = () => {
+  const navigate = useNavigate();
   const { user, logOut } = useAuth();
-
   const [role] = useRole();
+
   console.log(role);
 
   const handleLogOut = () => {
     logOut()
-      .then(() => {})
+      .then(() => {
+        navigate(`/`)
+      })
       .catch((error) => console.log(error));
   };
 
@@ -26,21 +29,21 @@ const NavigationBar = () => {
       </li>
       {role === "student" && (
         <li>
-          <NavLink className={"navLink"} to={`/student/dashboard`}>
+          <NavLink className={"navLink"} to={`/dashboard/student`}>
             <FaUserCheck size={25} /> Dashboard
           </NavLink>
         </li>
       )}
       {role === "instructor" && (
         <li>
-          <NavLink className={"navLink"} to={`/instructor/dashboard`}>
+          <NavLink className={"navLink"} to={`/dashboard/instructor`}>
             <FaUserTie size={25} /> Dashboard
           </NavLink>
         </li>
       )}
       {role === "admin" && (
         <li>
-          <NavLink className={"navLink"} to={`/admin/dashboard`}>
+          <NavLink className={"navLink"} to={`/dashboard/admin`}>
             <FaUserShield size={25} /> Dashboard
           </NavLink>
         </li>
