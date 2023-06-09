@@ -2,11 +2,13 @@
 @tailwind components;
 @tailwind utilities;
 
-.navLink{
-    background: bg-gray-100;
-    color: black;
+.navLink {
+  background: bg-gray-100;
+  color: black;
 }
 
 .active {
-    background: wheat;
+  background: none;
+  color: rgb(4, 75, 129);
+  font-weight: 600;
 }
