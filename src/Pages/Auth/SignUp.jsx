@@ -9,6 +9,7 @@ const SignUp = () => {
     register,
     handleSubmit,
     watch,
+    reset,
     formState: { errors },
   } = useForm();
 
@@ -23,9 +24,32 @@ const SignUp = () => {
       const loggedUser = result.user;
       console.log(loggedUser);
 
-      updateUserProfile(data.name, data.photoURL);
-
-      navigate("/");
+      updateUserProfile(data.name, data.photoURL)
+        .then(() => {
+          const saveUser = { name: data.name, email: data.email };
+          fetch(`${import.meta.env.VITE_URL}users`, {
+            method: "POST",
+            headers: {
+              "content-type": "application/json",
+            },
+            body: JSON.stringify(saveUser),
+          })
+            .then((res) => res.json())
+            .then((data) => {
+              if (data.insertedId) {
+                reset();
+                Swal.fire({
+                  position: "top-end",
+                  icon: "success",
+                  title: "User created successfully.",
+                  showConfirmButton: false,
+                  timer: 1500,
+                });
+                navigate("/");
+              }
+            });
+        })
+        .catch((error) => console.log(error));
     });
   };
 
