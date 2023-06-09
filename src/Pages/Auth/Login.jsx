@@ -22,7 +22,7 @@ const Login = () => {
   // submit function
   const loginForm = (data) => {
     console.log(data);
-    setError("")
+    setError("");
     signIn(data.email, data.password)
       .then((userCredential) => {
         // Signed in
@@ -104,6 +104,7 @@ const Login = () => {
           </div>
           <label className="label">
             <p className="label-text-alt text-red-600">{errorMessage}</p>
+            <br />
             <p className="label-text-alt">
               Don't have an account? <Link to={`/signup`}>SignUp now</Link>
             </p>

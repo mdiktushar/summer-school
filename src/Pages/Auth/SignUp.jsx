@@ -1,10 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
 import useAuth from "../../Hooks/useAuth";
 import Swal from "sweetalert2";
 
 const SignUp = () => {
+  const [errorMessage, setError] = useState("");
   const {
     register,
     handleSubmit,
@@ -19,6 +20,7 @@ const SignUp = () => {
   // submit function
   const signUpForm = (data) => {
     console.log(data);
+    setError("");
 
     createUser(data.email, data.password).then((result) => {
       const loggedUser = result.user;
@@ -162,6 +164,8 @@ const SignUp = () => {
             <button className="btn btn-primary">SignUp</button>
           </div>
           <label className="label">
+            <p className="label-text-alt text-red-600">{errorMessage}</p>
+            <br />
             <p className="label-text-alt">
               Already have an account? <Link to={`/login`}>Go to Login</Link>
             </p>

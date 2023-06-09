@@ -10,7 +10,7 @@ const Dashboard = () => {
   const [role] = useRole();
 
   const capitalizeFirstLetter = (string) => {
-    return string.charAt(0).toUpperCase() + string.slice(1);
+    return string.charAt(0).toUpperCase() + string.slice(1) + ` Dashboard`;
   };
 
   const handleLogOut = () => {
@@ -38,7 +38,7 @@ const Dashboard = () => {
         <label htmlFor="my-drawer-2" className="drawer-overlay"></label>
         <ul className="menu p-4 w-80 h-full bg-base-200 text-base-content">
           {/* Sidebar content here */}
-          <li className="mx-auto text-lg">{capitalizeFirstLetter(role)}</li>
+          <li className="mx-auto text-lg text-gray-500 font-bold">{capitalizeFirstLetter(role)}</li>
           <li className="mx-auto">
             <div className="avatar">
               <div className="w-32 rounded">
