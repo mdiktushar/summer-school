@@ -43,7 +43,7 @@ const NavigationBar = () => {
       )}
       {role === "admin" && (
         <li>
-          <NavLink className={"navLink"} to={`/dashboard/admin`}>
+          <NavLink className={"navLink"} to={`/dashboard/all-users`}>
             <FaUserShield size={25} /> Dashboard
           </NavLink>
         </li>

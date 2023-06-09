@@ -5,10 +5,12 @@ import Home from "../Pages/Home/Home";
 import PageNotFound from "../Pages/404/PageNotFound";
 import Login from "../Pages/Auth/Login";
 import SignUp from "../Pages/Auth/SignUp";
-import Dashboard from "../Layout/Dashboard";
+import DashboardLayout from "../Layout/DashboardLayout";
 import AdminDashboard from "../Pages/Admin/AdminDashboard";
 import StudentDashboard from "../Pages/Student/StudentDashboard";
 import InstructorDashboard from "../Pages/Instructor/InstructorDashboard";
+import { element } from "prop-types";
+import AllUsers from "../Pages/Admin/AllUsers";
 
 const router = createBrowserRouter([
   {
@@ -33,12 +35,16 @@ const router = createBrowserRouter([
    // Dashboard
    {
     path: `dashboard`,
-    element: <Dashboard />,
+    element: <DashboardLayout />,
     children: [
       // Admin
       {
         path: `admin`,
         element: <AdminDashboard />,
+      },
+      {
+        path: `all-users`,
+        element: <AllUsers />
       },
       // Student
       {
