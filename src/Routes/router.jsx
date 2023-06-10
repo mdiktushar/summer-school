@@ -7,10 +7,10 @@ import Login from "../Pages/Auth/Login";
 import SignUp from "../Pages/Auth/SignUp";
 import DashboardLayout from "../Layout/DashboardLayout";
 import AllUsers from "../Pages/Admin/AllUsers";
-import MyClasses from "../Pages/Instructor/MyClasses/MyClasses";
 import AddClass from "../Pages/Instructor/AddClass";
 import SelectedClasses from "../Pages/Student/SelectedClasses/SelectedClasses";
 import EnrolledClasses from "../Pages/Student/EnrolledClasses/EnrolledClasses";
+import MyClasses from "../Pages/Instructor/MyClasses";
 
 const router = createBrowserRouter([
   {
