@@ -17,7 +17,8 @@ const Login = () => {
   const navigate = useNavigate();
   const location = useLocation();
 
-  const goto = location.state?.form?.pathname || `/`;
+  const goto = location.state?.from?.pathname || `/`;
+  console.log(location);
 
   // submit function
   const loginForm = (data) => {
