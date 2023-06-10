@@ -32,15 +32,37 @@ const ManageClasses = () => {
       });
   };
 
-  const handleFeedback = (event) => {
+  const handleFeedback = (event, id) => {
     event.preventDefault();
 
     const formData = new FormData(event.target);
     const feedback = formData.get("feedback");
 
-    console.log("Form Data:", feedback);
+    // console.log(feedback,id);
+
+    fetch(`${import.meta.env.VITE_URL}class-feedback/${feedback}/${id}`, {
+      method: "PATCH",
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        // console.log(data);
+        if (data.modifiedCount) {
+          refetch();
+          Swal.fire({
+            position: "top-end",
+            icon: "success",
+            title: `Feedback is give..!`,
+            showConfirmButton: false,
+            timer: 1500,
+          });
+        }
+      });
 
     // Close the modal
+    handelModel()
+  };
+
+  const handelModel = () => {
     const modal = window.document.getElementById("my_modal_1");
     if (modal) {
       modal.close();
@@ -109,7 +131,7 @@ const ManageClasses = () => {
                   <td colSpan="6">
                     <dialog id="my_modal_1" className="modal">
                       <form
-                        onSubmit={handleFeedback}
+                        onSubmit={(event) => handleFeedback(event, item._id)}
                         method="dialog"
                         className="modal-box"
                       >
@@ -125,12 +147,14 @@ const ManageClasses = () => {
                         ></textarea>
 
                         <div className="modal-action">
-                          {/* if there is a button in form, it will close the modal */}
                           <button type="submit" className="btn">
                             Give Feedback
                           </button>
                         </div>
                       </form>
+                      <button onClick={handelModel} className="btn">
+                        Close
+                      </button>
                     </dialog>
                   </td>
                 </tr>

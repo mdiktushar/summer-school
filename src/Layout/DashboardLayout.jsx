@@ -87,7 +87,9 @@ const DashboardLayout = () => {
               <>
                 <li>
                   <NavLink to={`/dashboard/all-users`}>All Users</NavLink>
-                  <NavLink to={`/dashboard/manage-classes`}>Manage Classes</NavLink>
+                  <NavLink to={`/dashboard/manage-classes`}>
+                    Manage Classes
+                  </NavLink>
                 </li>
               </>
             )}
@@ -117,7 +119,7 @@ const DashboardLayout = () => {
                 </li>
               </>
             )}
-            <li onClick={handleLogOut}>
+            <li className="mt-20" onClick={handleLogOut}>
               <p>Logout</p>
             </li>
           </ul>
