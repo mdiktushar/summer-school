@@ -17,7 +17,40 @@ const AddClass = () => {
 
     const formData = new FormData();
     formData.append("image", data.image[0]);
-    console.log(formData);
+
+    fetch(img_hosting_url, {
+      method: "POST",
+      body: formData,
+    })
+      .then((res) => res.json())
+      .then((imgResponse) => {
+        if (imgResponse.success) {
+          const imgURL = imgResponse.data.display_url;
+          const { name, price, state, instructorName, email } = data;
+          const newItem = {
+            name,
+            instructorName,
+            email,
+            price: parseFloat(price),
+            state,
+            image: imgURL,
+          };
+          console.log(newItem);
+          axiosSecure.post("/class", newItem).then((data) => {
+            console.log("after posting new class:", data.data);
+            if (data.data.insertedId) {
+              reset();
+              Swal.fire({
+                position: "top-end",
+                icon: "success",
+                title: "Class is added successfully",
+                showConfirmButton: false,
+                timer: 1500,
+              });
+            }
+          });
+        }
+      });
   };
 
   if (loading) {
