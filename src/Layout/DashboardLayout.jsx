@@ -87,6 +87,7 @@ const DashboardLayout = () => {
               <>
                 <li>
                   <NavLink to={`/dashboard/all-users`}>All Users</NavLink>
+                  <NavLink to={`/dashboard/manage-classes`}>Manage Classes</NavLink>
                 </li>
               </>
             )}

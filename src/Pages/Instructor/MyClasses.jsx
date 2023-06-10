@@ -10,7 +10,7 @@ const MyClasses = () => {
     const res = await axiosSecure.get("/class");
     return res.data;
   });
-  console.log(classes);
+  // console.log(classes);
   return (
     <div>
       <h2 className="text-center font-bold text-4xl">My Classes</h2>
@@ -32,24 +32,7 @@ const MyClasses = () => {
             {classes
               .filter((item) => item.email == user.email)
               .map((item) => (
-                <>
-                  <dialog id="my_modal_1" className="modal">
-                    <form method="dialog" className="modal-box">
-                      <h3 className="font-bold text-lg">Hello, {item.instructorName}</h3>
-                      <p className="py-4">
-                        {item.feedback ? (
-                          <>{item.feedback}</>
-                        ) : (
-                          <>No Feedback Yet</>
-                        )}
-                      </p>
-                      <div className="modal-action">
-                        {/* if there is a button in form, it will close the modal */}
-                        <button className="btn">Close</button>
-                      </div>
-                    </form>
-                  </dialog>
-
+                <React.Fragment key={item._id}>
                   <tr>
                     <td>
                       <div className="flex items-center space-x-3">
@@ -75,7 +58,27 @@ const MyClasses = () => {
                       <button className="btn btn-ghost btn-xs">Update</button>
                     </th>
                   </tr>
-                </>
+                  <tr>
+                    <td colSpan="6">
+                      <dialog id="my_modal_1" className="modal">
+                        <form method="dialog" className="modal-box">
+                          <h3 className="font-bold text-lg">Hello, {item.instructorName}</h3>
+                          <p className="py-4">
+                            {item.feedback ? (
+                              <>{item.feedback}</>
+                            ) : (
+                              <>No Feedback Yet</>
+                            )}
+                          </p>
+                          <div className="modal-action">
+                            {/* if there is a button in form, it will close the modal */}
+                            <button className="btn">Close</button>
+                          </div>
+                        </form>
+                      </dialog>
+                    </td>
+                  </tr>
+                </React.Fragment>
               ))}
           </tbody>
         </table>

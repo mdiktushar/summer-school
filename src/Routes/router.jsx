@@ -11,6 +11,7 @@ import AddClass from "../Pages/Instructor/AddClass";
 import SelectedClasses from "../Pages/Student/SelectedClasses/SelectedClasses";
 import EnrolledClasses from "../Pages/Student/EnrolledClasses/EnrolledClasses";
 import MyClasses from "../Pages/Instructor/MyClasses";
+import ManageClasses from "../Pages/Admin/ManageClasses";
 
 const router = createBrowserRouter([
   {
@@ -41,6 +42,10 @@ const router = createBrowserRouter([
       {
         path: `all-users`,
         element: <AllUsers />,
+      },
+      {
+        path: `manage-classes`,
+        element: <ManageClasses />,
       },
       // Student
       {
