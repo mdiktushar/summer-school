@@ -34,6 +34,8 @@ const AddClass = () => {
             price: parseFloat(price),
             state,
             image: imgURL,
+            enrolledStudents: parseFloat(0),
+            feedback : null,
           };
           console.log(newItem);
           axiosSecure.post("/class", newItem).then((data) => {
