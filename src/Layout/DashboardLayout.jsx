@@ -93,13 +93,27 @@ const DashboardLayout = () => {
             {/* if Instructor */}
             {role == "instructor" && (
               <>
-                <li></li>
+                <li>
+                  <NavLink to={`/dashboard/my-classes`}>My Classes</NavLink>
+                </li>
+                <li>
+                  <NavLink to={`/dashboard/add-class`}>Add Class</NavLink>
+                </li>
               </>
             )}
             {/* if Student */}
             {role == "student" && (
               <>
-                <li></li>
+                <li>
+                  <NavLink to={`/dashboard/enrolled-classes`}>
+                    Selected Classes
+                  </NavLink>
+                </li>
+                <li>
+                  <NavLink to={`/dashboard/selected-classes`}>
+                    Selected Classes
+                  </NavLink>
+                </li>
               </>
             )}
             <li onClick={handleLogOut}>

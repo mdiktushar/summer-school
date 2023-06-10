@@ -15,7 +15,7 @@ const NavigationBar = () => {
   const handleLogOut = () => {
     logOut()
       .then(() => {
-        navigate(`/`)
+        navigate(`/`);
       })
       .catch((error) => console.log(error));
   };
@@ -29,14 +29,14 @@ const NavigationBar = () => {
       </li>
       {role === "student" && (
         <li>
-          <NavLink className={"navLink"} to={`/dashboard/student`}>
+          <NavLink className={"navLink"} to={`/dashboard/enrolled-classes`}>
             <FaUserCheck size={25} /> Dashboard
           </NavLink>
         </li>
       )}
       {role === "instructor" && (
         <li>
-          <NavLink className={"navLink"} to={`/dashboard/instructor`}>
+          <NavLink className={"navLink"} to={`/dashboard/my-classes`}>
             <FaUserTie size={25} /> Dashboard
           </NavLink>
         </li>

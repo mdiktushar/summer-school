@@ -6,11 +6,11 @@ import PageNotFound from "../Pages/404/PageNotFound";
 import Login from "../Pages/Auth/Login";
 import SignUp from "../Pages/Auth/SignUp";
 import DashboardLayout from "../Layout/DashboardLayout";
-import AdminDashboard from "../Pages/Admin/AdminDashboard";
-import StudentDashboard from "../Pages/Student/StudentDashboard";
-import InstructorDashboard from "../Pages/Instructor/InstructorDashboard";
-import { element } from "prop-types";
 import AllUsers from "../Pages/Admin/AllUsers";
+import MyClasses from "../Pages/Instructor/MyClasses/MyClasses";
+import AddClass from "../Pages/Instructor/AddClass";
+import SelectedClasses from "../Pages/Student/SelectedClasses/SelectedClasses";
+import EnrolledClasses from "../Pages/Student/EnrolledClasses/EnrolledClasses";
 
 const router = createBrowserRouter([
   {
@@ -32,29 +32,33 @@ const router = createBrowserRouter([
       },
     ],
   },
-   // Dashboard
-   {
+  // Dashboard
+  {
     path: `/dashboard`,
     element: <DashboardLayout />,
     children: [
       // Admin
       {
-        path: `admin`,
-        element: <AdminDashboard />,
-      },
-      {
         path: `all-users`,
-        element: <AllUsers />
+        element: <AllUsers />,
       },
       // Student
       {
-        path: `student`,
-        element: <StudentDashboard />,
+        path: `enrolled-classes`,
+        element: <EnrolledClasses />,
+      },
+      {
+        path: `selected-classes`,
+        element: <SelectedClasses />,
       },
       // Instructor
       {
-        path: "instructor",
-        element: <InstructorDashboard />,
+        path: `my-classes`,
+        element: <MyClasses />,
+      },
+      {
+        path: `add-class`,
+        element: <AddClass />,
       },
     ],
   },
