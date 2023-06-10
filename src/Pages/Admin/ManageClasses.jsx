@@ -1,12 +1,12 @@
 import React from "react";
 import { useQuery } from "@tanstack/react-query";
 import useAxiosSecure from "../../Hooks/useAxiosSecure";
-// import useAuth from "../../Hooks/useAuth";
+import useAuth from "../../Hooks/useAuth";
 import Swal from "sweetalert2";
 
 const ManageClasses = () => {
   const [axiosSecure] = useAxiosSecure();
-//   const { user } = useAuth();
+  const { user } = useAuth();
   const { data: classes = [], refetch } = useQuery(["classes"], async () => {
     const res = await axiosSecure.get("/class");
     return res.data;
@@ -30,6 +30,21 @@ const ManageClasses = () => {
           });
         }
       });
+  };
+
+  const handleFeedback = (event) => {
+    event.preventDefault();
+
+    const formData = new FormData(event.target);
+    const feedback = formData.get("feedback");
+
+    console.log("Form Data:", feedback);
+
+    // Close the modal
+    const modal = window.document.getElementById("my_modal_1");
+    if (modal) {
+      modal.close();
+    }
   };
 
   return (
@@ -70,22 +85,54 @@ const ManageClasses = () => {
                       <button
                         disabled={item.state != "pending"}
                         className="btn btn-xs join-item bg-green-200"
-                        onClick={()=>handleStatus('approved', item._id)}
+                        onClick={() => handleStatus("approved", item._id)}
                       >
                         Approve
                       </button>
                       <button
                         disabled={item.state != "pending"}
                         className="btn btn-xs join-item bg-red-200"
-                        onClick={()=>handleStatus('denied', item._id)}
+                        onClick={() => handleStatus("denied", item._id)}
                       >
                         Deny
                       </button>
-                      <button className="btn btn-xs join-item bg-purple-200">
+                      <button
+                        className="btn btn-xs join-item bg-purple-200"
+                        onClick={() => window.my_modal_1.showModal()}
+                      >
                         feedback
                       </button>
                     </div>
                   </th>
+                </tr>
+                <tr>
+                  <td colSpan="6">
+                    <dialog id="my_modal_1" className="modal">
+                      <form
+                        onSubmit={handleFeedback}
+                        method="dialog"
+                        className="modal-box"
+                      >
+                        <h3 className="font-bold text-lg">
+                          Hello , Admin {user.displayName}
+                        </h3>
+                        <p>Give {item.instructorName} your Feedback</p>
+                        <textarea
+                          name="feedback"
+                          placeholder={`Feedback to ${item.instructorName}`}
+                          defaultValue={item.feedback}
+                          className="textarea textarea-bordered textarea-lg w-full max-w-xs mt-3"
+                        ></textarea>
+
+                        <div className="modal-action">
+                          {/* if there is a button in form, it will close the modal */}
+                          <button type="submit" className="btn">
+                            Give Feedback
+                          </button>
+                        </div>
+                      </form>
+                    </dialog>
+                  </td>
                 </tr>
               </React.Fragment>
             ))}
