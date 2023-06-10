@@ -27,6 +27,11 @@ const NavigationBar = () => {
           Home
         </NavLink>
       </li>
+      <li>
+      <NavLink className={"navLink"} to={`/all-classes`}>
+          All Classes
+        </NavLink>
+      </li>
       {role === "student" && (
         <li>
           <NavLink className={"navLink"} to={`/dashboard/enrolled-classes`}>

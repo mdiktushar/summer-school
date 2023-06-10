@@ -32,7 +32,8 @@ const AddClass = () => {
             instructorName,
             email,
             price: parseFloat(price),
-            state,
+            seats: parseFloat(seats),
+            state: 'pending',
             image: imgURL,
             enrolledStudents: parseFloat(0),
             feedback : null,
@@ -127,15 +128,13 @@ const AddClass = () => {
         <div className="flex my-4">
           <div className="form-control w-full">
             <label className="label">
-              <span className="label-text font-semibold">State*</span>
+              <span className="label-text font-semibold">Seats*</span>
             </label>
             <input
-              name="state"
-              type="text"
-              placeholder="Type here"
-              defaultValue={"pending"}
+              name="seats"
+              type="number"
+              placeholder="Available Seats"
               className="input input-bordered w-full "
-              readOnly
               {...register("state", { required: true })}
             />
           </div>
