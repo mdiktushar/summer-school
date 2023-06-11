@@ -26,7 +26,7 @@ const AddClass = () => {
       .then((imgResponse) => {
         if (imgResponse.success) {
           const imgURL = imgResponse.data.display_url;
-          const { name, price, state, instructorName, email } = data;
+          const { name, price, state, instructorName, email, seats } = data;
           const newItem = {
             name,
             instructorName,
@@ -135,7 +135,7 @@ const AddClass = () => {
               type="number"
               placeholder="Available Seats"
               className="input input-bordered w-full "
-              {...register("state", { required: true })}
+              {...register("seats", { required: true })}
             />
           </div>
           <div className="form-control w-full ml-4">

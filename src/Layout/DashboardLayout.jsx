@@ -117,6 +117,11 @@ const DashboardLayout = () => {
                     Selected Classes
                   </NavLink>
                 </li>
+                <li>
+                  <NavLink to={`/dashboard/payment-history`}>
+                    Payment History
+                  </NavLink>
+                </li>
               </>
             )}
             <li className="mt-20" onClick={handleLogOut}>

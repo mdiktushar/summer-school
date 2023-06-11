@@ -1,7 +1,6 @@
 import React from "react";
 import { useQuery } from "@tanstack/react-query";
 import useAxiosSecure from "../../Hooks/useAxiosSecure";
-import useAuth from "../../Hooks/useAuth";
 import ClassCard from "./ClassCard/ClassCard";
 import useRole from "../../Hooks/useRole";
 
