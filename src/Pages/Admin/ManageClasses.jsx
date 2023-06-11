@@ -3,6 +3,7 @@ import { useQuery } from "@tanstack/react-query";
 import useAxiosSecure from "../../Hooks/useAxiosSecure";
 import useAuth from "../../Hooks/useAuth";
 import Swal from "sweetalert2";
+import { Link } from "react-router-dom";
 
 const ManageClasses = () => {
   const [axiosSecure] = useAxiosSecure();
@@ -30,43 +31,6 @@ const ManageClasses = () => {
           });
         }
       });
-  };
-
-  const handleFeedback = (event, id) => {
-    event.preventDefault();
-
-    const formData = new FormData(event.target);
-    const feedback = formData.get("feedback");
-
-    // console.log(feedback,id);
-
-    fetch(`${import.meta.env.VITE_URL}class-feedback/${feedback}/${id}`, {
-      method: "PATCH",
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        // console.log(data);
-        if (data.modifiedCount) {
-          refetch();
-          Swal.fire({
-            position: "top-end",
-            icon: "success",
-            title: `Feedback is give..!`,
-            showConfirmButton: false,
-            timer: 1500,
-          });
-        }
-      });
-
-    // Close the modal
-    handelModel()
-  };
-
-  const handelModel = () => {
-    const modal = window.document.getElementById("my_modal_1");
-    if (modal) {
-      modal.close();
-    }
   };
 
   return (
@@ -118,45 +82,13 @@ const ManageClasses = () => {
                       >
                         Deny
                       </button>
-                      <button
-                        className="btn btn-xs join-item bg-purple-200"
-                        onClick={() => window.my_modal_1.showModal()}
-                      >
-                        feedback
-                      </button>
+                      <Link to={`/dashboard/give-feedback/${item._id}/${user.displayName}/${item.instructorName}/${item.feedback}`}>
+                        <button className="btn btn-xs join-item bg-purple-200">
+                          Feedback
+                        </button>
+                      </Link>
                     </div>
                   </th>
-                </tr>
-                <tr>
-                  <td colSpan="6">
-                    <dialog id="my_modal_1" className="modal">
-                      <form
-                        onSubmit={(event) => handleFeedback(event, item._id)}
-                        method="dialog"
-                        className="modal-box"
-                      >
-                        <h3 className="font-bold text-lg">
-                          Hello , Admin {user.displayName}
-                        </h3>
-                        <p>Give {item.instructorName} your Feedback</p>
-                        <textarea
-                          name="feedback"
-                          placeholder={`Feedback to ${item.instructorName}`}
-                          defaultValue={item.feedback}
-                          className="textarea textarea-bordered textarea-lg w-full max-w-xs mt-3"
-                        ></textarea>
-
-                        <div className="modal-action">
-                          <button type="submit" className="btn">
-                            Give Feedback
-                          </button>
-                        </div>
-                      </form>
-                      <button onClick={handelModel} className="btn">
-                        Close
-                      </button>
-                    </dialog>
-                  </td>
                 </tr>
               </React.Fragment>
             ))}

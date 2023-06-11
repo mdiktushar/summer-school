@@ -10,7 +10,17 @@ const MyClasses = () => {
     const res = await axiosSecure.get("/class");
     return res.data;
   });
-  // console.log(classes);
+
+  const handelModelOpen = (content) => {
+    const modal = window.document.getElementById("my_modal_1");
+    if (modal) {
+      const textarea = modal.querySelector('textarea[name="feedback"]');
+
+      textarea.defaultValue = content;
+      modal.showModal();
+    }
+  };
+
   return (
     <div>
       <h2 className="text-center font-bold text-4xl">My Classes</h2>
@@ -48,7 +58,7 @@ const MyClasses = () => {
                     <td>{item.state}</td>
                     <td>
                       <button
-                        onClick={() => window.my_modal_1.showModal()}
+                        onClick={() => handelModelOpen(item.feedback)}
                         className="btn btn-ghost btn-xs"
                       >
                         Feedback
@@ -62,14 +72,15 @@ const MyClasses = () => {
                     <td colSpan="6">
                       <dialog id="my_modal_1" className="modal">
                         <form method="dialog" className="modal-box">
-                          <h3 className="font-bold text-lg">Hello, {item.instructorName}</h3>
-                          <p className="py-4">
-                            {item.feedback ? (
-                              <>{item.feedback}</>
-                            ) : (
-                              <>No Feedback Yet</>
-                            )}
-                          </p>
+                          <h3 className="font-bold text-lg">
+                            Hello, {item.instructorName}
+                          </h3>
+                          <textarea
+                            placeholder="Give Your Feedback"
+                            name="feedback"
+                            className="textarea textarea-bordered textarea-md w-full max-w-xs"
+                            readOnly
+                          ></textarea>
                           <div className="modal-action">
                             {/* if there is a button in form, it will close the modal */}
                             <button className="btn">Close</button>

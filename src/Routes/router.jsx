@@ -19,6 +19,7 @@ import AuthForbidden from "./AuthForbidden";
 import AdminRoute from "./AdminRoute";
 import InstructorRoute from "./InstructorRoute";
 import StudentRoute from "./StudentRoute";
+import GiveFeedback from "../Pages/Admin/GiveFeedback";
 
 const router = createBrowserRouter([
   {
@@ -76,6 +77,14 @@ const router = createBrowserRouter([
         element: (
           <AdminRoute>
             <ManageClasses />
+          </AdminRoute>
+        ),
+      },
+      {
+        path: `give-feedback/:id/:user/:instructor/:feedback`,
+        element: (
+          <AdminRoute>
+            <GiveFeedback />
           </AdminRoute>
         ),
       },
