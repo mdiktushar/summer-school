@@ -6,7 +6,6 @@ import useAuth from "../../../Hooks/useAuth";
 
 const EnrolledClasses = () => {
   const [axiosSecure] = useAxiosSecure();
-  const [role, isRoleLoading] = useRole();
   const { user } = useAuth();
   const { data: courses = [], refetch } = useQuery(["cart"], async () => {
     const res = await axiosSecure.get(`/enroll?email=${user.email}`);
