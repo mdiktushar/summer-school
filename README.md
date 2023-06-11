@@ -1,6 +1,6 @@
 <h1>Summer School</h1>
 
-Live Website: https://goplay-3b4be.web.app
+Live Website: https://famous-yeot-804eb7.netlify.app/
 <br/>
 Frontend repository: https://github.com/programming-hero-web-course1/b712-summer-camp-client-side-mdiktushar
 <br/>

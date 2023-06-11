@@ -11,7 +11,7 @@ const Home = () => {
   const [axiosSecure] = useAxiosSecure();
   const [role, isRoleLoading] = useRole();
   const { data: classes = [], refetch } = useQuery(["classes"], async () => {
-    const res = await axiosSecure.get("/class?state=approved");
+    const res = await axiosSecure.get("/class?state=approved&popular=1");
     return res.data;
   });
 

@@ -60,13 +60,13 @@ const ClassCard = ({ info, role }) => {
       } shadow-xl`}
     >
       <figure>
-        <img src={info.image} alt="Shoes" />
+        <img  className="object-cover h-48 w-96" src={info.image} alt="Shoes" />
       </figure>
       <div className="card-body">
         <h2 className="card-title">
           {info.name}
           <div
-            className={`badge ${
+            className={`badge w-60 ${
               info.seats ? "badge-success" : "badge-secondary"
             }`}
           >
@@ -75,6 +75,7 @@ const ClassCard = ({ info, role }) => {
           <div className="badge badge-outline"> {info.price}$</div>
         </h2>
         <p>By: {info.instructorName}</p>
+        <div className="badge badge-ghost">{info.enrolledStudents} Students</div>
         <div className="card-actions justify-end">
           <button
             disabled={

@@ -28,7 +28,11 @@ const SignUp = () => {
 
       updateUserProfile(data.name, data.photoURL)
         .then(() => {
-          const saveUser = { name: data.name, email: data.email, image: data.photoURL };
+          const saveUser = {
+            name: data.name,
+            email: data.email,
+            image: data.photoURL,
+          };
           fetch(`${import.meta.env.VITE_URL}users`, {
             method: "POST",
             headers: {
@@ -51,7 +55,12 @@ const SignUp = () => {
               }
             });
         })
-        .catch((error) => console.log(error));
+        .catch((error) => {
+          const errorCode = error.code;
+          const errorMessage = error.message;
+          console.log(error);
+          setError(errorMessage);
+        });
     });
   };
 
