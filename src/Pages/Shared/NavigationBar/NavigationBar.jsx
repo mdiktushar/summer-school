@@ -4,11 +4,14 @@ import logo from "../../../assets/logo.png";
 import useAuth from "../../../Hooks/useAuth";
 import useRole from "../../../Hooks/useRole";
 import { FaUserCheck, FaUserTie, FaUserShield } from "react-icons/fa";
+import { useContext } from "react";
+import { ThemeContext } from "../../../providers/ThemeProvider";
 
 const NavigationBar = () => {
   const navigate = useNavigate();
   const { user, logOut } = useAuth();
   const [role] = useRole();
+  const {changeTheme, buttonName} = useContext(ThemeContext)
 
   console.log(role);
 
@@ -127,8 +130,8 @@ const NavigationBar = () => {
           </Link>
         )}
 
-        <button to={``} className="btn">
-          Theme
+        <button onClick={changeTheme} className="btn">
+          {buttonName}
         </button>
       </div>
     </div>

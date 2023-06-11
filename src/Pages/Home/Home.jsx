@@ -29,7 +29,7 @@ const Home = () => {
 
       <h2 className="text-center font-bold text-4xl m-10">Popular Classes</h2>
       <hr className="" />
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-2 lg:mx-20 my-5">
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-2 lg:mx-20 my-5 content-evenly">
         {classes.slice(0, 6).map((item) => (
           <ClassCard key={item._id} info={item} role={role} />
         ))}
