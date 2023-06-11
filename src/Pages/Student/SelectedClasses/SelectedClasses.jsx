@@ -13,7 +13,7 @@ const SelectedClasses = () => {
     const res = await axiosSecure.get(`/carts?email=${user.email}`);
     return res.data;
   });
-  //   console.log(carts);
+  console.log(carts);
 
   const handleDelete = (id) => {
     fetch(`${import.meta.env.VITE_URL}carts/${id}`, {
@@ -28,6 +28,25 @@ const SelectedClasses = () => {
             position: "top-end",
             icon: "success",
             title: `Deleted`,
+            showConfirmButton: false,
+            timer: 1500,
+          });
+        }
+      });
+  };
+
+  const handlePay = (id, class_ID, email) => {
+    fetch(`${import.meta.env.VITE_URL}pay/${id}/${class_ID}/${email}`, {
+      method: "DELETE",
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+        if (data.deletedCount) {
+          refetch();
+          Swal.fire({
+            icon: "success",
+            title: `Payed`,
             showConfirmButton: false,
             timer: 1500,
           });
@@ -54,6 +73,7 @@ const SelectedClasses = () => {
             {/* row 1 */}
             {carts.map((cart) => (
               <tr key={cart._id}>
+                {console.log(cart.classID)}
                 <td>
                   <div className="flex items-center space-x-3">
                     <div className="avatar">
@@ -65,9 +85,17 @@ const SelectedClasses = () => {
                 </td>
                 <td> {cart.name} </td>
                 <td> {cart.price}$</td>
+                <td>{cart.classID}</td>
                 <td>
                   <div className="join join-vertical lg:join-horizontal">
-                    <button className="btn join-item bg-blue-200">Pay</button>
+                    <button
+                      onClick={() =>
+                        handlePay(cart._id, cart.classID, user.email)
+                      }
+                      className="btn join-item bg-blue-200"
+                    >
+                      Pay
+                    </button>
                     <button
                       onClick={() => handleDelete(cart._id)}
                       className="btn join-item bg-red-200"
