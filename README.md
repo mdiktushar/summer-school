@@ -1,6 +1,6 @@
 <h1>Summer School</h1>
 
-Live Website: 
+Live Website: https://goplay-3b4be.web.app
 <br/>
 Frontend repository: https://github.com/programming-hero-web-course1/b712-summer-camp-client-side-mdiktushar
 <br/>
