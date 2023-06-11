@@ -1,4 +1,4 @@
-<h2></h2>
+<h1>Summer School</h1>
 
 Live Website: 
 <br/>
@@ -11,8 +11,20 @@ Backend repository: https://github.com/programming-hero-web-course1/b7a12-summer
 <br/>
 
 
-<h1></h1>
+<h3>Points about my web app</h3>
 <ul>
-    <li></li>
+    <li>There are three types of users: Admin, Instructor, School</li>
+    <li>Student can enroll the class</li>
+    <li>Instructors are allowed to create a class</li>
+    <li>Admin will make an user admin or instructor</li>
+    <li>Admin will also approve or deny a class</li>
+</ul>
 
+<h3>Packages & Technology's</h3>
+<ul>
+    <li>React Application</li>
+    <li>Backend is created with express js</li>
+    <li>MongoDB database</li>
+    <li>Auth is handled with Firebase Auth</li>
+    <li>JTW validation is used</li>
 </ul>
