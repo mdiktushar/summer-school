@@ -12,7 +12,11 @@ const ClassCard = ({ info, role }) => {
     if (user && user.email) {
       const selectedClass = {
         classID: info._id,
+        name: info.name,
+        instructorEmail: info.email,
         email: user.email,
+        price: info.price,
+        image: info.image,
       };
       fetch(`${import.meta.env.VITE_URL}carts`, {
         method: "POST",
@@ -73,7 +77,9 @@ const ClassCard = ({ info, role }) => {
         <p>By: {info.instructorName}</p>
         <div className="card-actions justify-end">
           <button
-            disabled={role === "admin" || role === "instructor"}
+            disabled={
+              role === "admin" || role === "instructor" || info.seats == 0
+            }
             className="btn btn-xs btn-accent"
             onClick={handelSelect}
           >

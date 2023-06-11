@@ -109,7 +109,7 @@ const DashboardLayout = () => {
               <>
                 <li>
                   <NavLink to={`/dashboard/enrolled-classes`}>
-                    Selected Classes
+                    Enrolled Classes
                   </NavLink>
                 </li>
                 <li>
