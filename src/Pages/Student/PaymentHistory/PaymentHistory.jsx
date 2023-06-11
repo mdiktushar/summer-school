@@ -1,14 +1,12 @@
 import React from "react";
 import { useQuery } from "@tanstack/react-query";
 import useAxiosSecure from "../../../Hooks/useAxiosSecure";
-import useRole from "../../../Hooks/useRole";
 import useAuth from "../../../Hooks/useAuth";
-import { useState } from "react";
 
 const PaymentHistory = () => {
   const [axiosSecure] = useAxiosSecure();
   const { user } = useAuth();
-  const { data: courses = [], refetch } = useQuery(["cart"], async () => {
+  const { data: courses = [], refetch } = useQuery(["course"], async () => {
     const res = await axiosSecure.get(`/enroll?email=${user.email}`);
     return res.data;
   });

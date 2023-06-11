@@ -29,7 +29,12 @@ const NavigationBar = () => {
       </li>
       <li>
       <NavLink className={"navLink"} to={`/all-classes`}>
-          All Classes
+          Classes
+        </NavLink>
+      </li>
+      <li>
+      <NavLink className={"navLink"} to={`all-instructors`}>
+          Instructors
         </NavLink>
       </li>
       {role === "student" && (
