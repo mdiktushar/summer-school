@@ -104,7 +104,7 @@ const NavigationBar = () => {
           <div className="dropdown dropdown-end">
             <label tabIndex={0} className=" m-1">
               <div
-                className="avatar tooltip tooltip-bottom"
+                className="avatar tooltip tooltip-left"
                 data-tip={user.displayName}
               >
                 <div className="w-10 rounded-full">
