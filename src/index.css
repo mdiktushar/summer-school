@@ -4,11 +4,10 @@
 
 .navLink {
   background: bg-gray-100;
-  color: black;
 }
 
 .active {
   background: none;
-  color: rgb(4, 75, 129);
+  color: rgb(52, 135, 199);
   font-weight: 600;
 }

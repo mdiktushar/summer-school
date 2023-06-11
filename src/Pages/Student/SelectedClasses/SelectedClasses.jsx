@@ -85,7 +85,6 @@ const SelectedClasses = () => {
                 </td>
                 <td> {cart.name} </td>
                 <td> {cart.price}$</td>
-                <td>{cart.classID}</td>
                 <td>
                   <div className="join join-vertical lg:join-horizontal">
                     <button

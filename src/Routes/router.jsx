@@ -15,6 +15,10 @@ import ManageClasses from "../Pages/Admin/ManageClasses";
 import AllClasses from "../Pages/AllClasses/AllClasses";
 import PaymentHistory from "../Pages/Student/PaymentHistory/PaymentHistory";
 import AllInstructor from "../Pages/AllInstructor/AllInstructor";
+import AuthForbidden from "./AuthForbidden";
+import AdminRoute from "./AdminRoute";
+import InstructorRoute from "./InstructorRoute";
+import StudentRoute from "./StudentRoute";
 
 const router = createBrowserRouter([
   {
@@ -28,11 +32,20 @@ const router = createBrowserRouter([
       // Auth
       {
         path: `login`,
-        element: <Login />,
+        element: (
+          <AuthForbidden>
+            {" "}
+            <Login />
+          </AuthForbidden>
+        ),
       },
       {
         path: `signup`,
-        element: <SignUp />,
+        element: (
+          <AuthForbidden>
+            <SignUp />
+          </AuthForbidden>
+        ),
       },
       {
         path: `all-classes`,
@@ -40,8 +53,8 @@ const router = createBrowserRouter([
       },
       {
         path: `all-instructors`,
-        element: <AllInstructor />
-      }
+        element: <AllInstructor />,
+      },
     ],
   },
   // Dashboard
@@ -52,33 +65,61 @@ const router = createBrowserRouter([
       // Admin
       {
         path: `all-users`,
-        element: <AllUsers />,
+        element: (
+          <AdminRoute>
+            <AllUsers />
+          </AdminRoute>
+        ),
       },
       {
         path: `manage-classes`,
-        element: <ManageClasses />,
+        element: (
+          <AdminRoute>
+            <ManageClasses />
+          </AdminRoute>
+        ),
       },
       // Student
       {
         path: `enrolled-classes`,
-        element: <EnrolledClasses />,
+        element: (
+          <StudentRoute>
+            <EnrolledClasses />
+          </StudentRoute>
+        ),
       },
       {
         path: `selected-classes`,
-        element: <SelectedClasses />,
+        element: (
+          <StudentRoute>
+            <SelectedClasses />
+          </StudentRoute>
+        ),
       },
       {
         path: `payment-history`,
-        element: <PaymentHistory />,
+        element: (
+          <StudentRoute>
+            <PaymentHistory />
+          </StudentRoute>
+        ),
       },
       // Instructor
       {
         path: `my-classes`,
-        element: <MyClasses />,
+        element: (
+          <InstructorRoute>
+            <MyClasses />
+          </InstructorRoute>
+        ),
       },
       {
         path: `add-class`,
-        element: <AddClass />,
+        element: (
+          <InstructorRoute>
+            <AddClass />
+          </InstructorRoute>
+        ),
       },
     ],
   },
