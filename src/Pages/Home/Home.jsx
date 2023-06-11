@@ -5,6 +5,7 @@ import useAxiosSecure from "../../Hooks/useAxiosSecure";
 import ClassCard from "../AllClasses/ClassCard/ClassCard";
 import useRole from "../../Hooks/useRole";
 import Instructor from "../AllInstructor/Instructor/Instructor";
+import Album from "./components/Album";
 
 const Home = () => {
   const [axiosSecure] = useAxiosSecure();
@@ -41,6 +42,9 @@ const Home = () => {
            <Instructor key={instructor._id} instructor={instructor} />
         ))}
       </div>
+
+
+      <Album />
     </div>
   );
 };
